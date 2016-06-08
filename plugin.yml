@@ -1,0 +1,17 @@
+name: LBPets
+main: LBPets\Main
+version: 0.0.1
+api: [1.4.0]
+load:
+author: LBSG
+description: Lifeboat Pets Plugin For All
+website: https://lbsg.net
+commands:
+ pets:
+  description: "Manages the pet plugin"
+  usage: "/pets <command> <args>"
+  permission: lbpets
+permissions:
+ lbpets:
+  default: op
+  description: "Commands that handle all things pets"
