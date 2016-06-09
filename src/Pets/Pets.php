@@ -11,16 +11,47 @@ use pocketmine\block\Liquid;
 use pocketmine\entity\Creature;
 use pocketmine\network\protocol\AddEntityPacket;
 
+/**
+ * The main class for a pet
+ */
 abstract class Pets extends Creature {
 
+	/**
+	 * The owner of the plugin
+	 *
+	 * @type null
+	 */
 	protected $owner = null;
+
+	/**
+	 * The distance to the owner
+	 *
+	 * @type integer
+	 */
 	protected $distanceToOwner = 0;
+
+	/**
+	 * The target to the pet
+	 *
+	 * @type null
+	 */
 	protected $closeTarget = null;
 
+	/**
+	 * Sets the owner of the plugin
+	 *
+	 * @param Player $player The player to set the player for
+	 */
 	public function setOwner(Player $player) {
 		$this->owner = $player;
 	}
 
+	/**
+	 * Player to spawn the pet to
+	 *
+	 * @param  Player $player The player to spawn to
+	 * @return null
+	 */
 	public function spawnTo(Player $player) {
 		if(!$this->closed && $player->spawned && $player->dead !== true) {
 			if (!isset($this->hasSpawned[$player->getId()]) && isset($player->usedChunks[Level::chunkHash($this->chunk->getX(), $this->chunk->getZ())])) {
@@ -43,6 +74,11 @@ abstract class Pets extends Creature {
 		}
 	}
 
+	/**
+	 * Update the movement of the pet
+	 *
+	 * @return null
+	 */
 	public function updateMovement() {
 		if ($this->lastX !== $this->x || $this->lastY !== $this->y || $this->lastZ !== $this->z || $this->lastYaw !== $this->yaw || $this->lastPitch !== $this->pitch) {
 			$this->lastX = $this->x;
@@ -55,6 +91,14 @@ abstract class Pets extends Creature {
 		$this->level->addEntityMovement($this->getViewers(), $this->getId(), $this->x, $this->y, $this->z, $this->yaw, $this->pitch);
 	}
 
+	/**
+	 * Moves the pet
+	 *
+	 * @param  integer $dx The x value
+	 * @param  integer $dy The y value
+	 * @param  integer $dz The z value
+	 * @return boolean Whether the move was successful
+	 */
 	public function move($dx, $dy, $dz) {
 		$this->boundingBox->offset($dx, 0, 0);
 		$this->boundingBox->offset(0, 0, $dz);
@@ -64,10 +108,20 @@ abstract class Pets extends Creature {
 		return true;
 	}
 
+	/**
+	 * The speed of the pet
+	 *
+	 * @return integer The speed of the pet
+	 */
 	public function getSpeed() {
 		return 1;
 	}
 
+	/**
+	 * Updates the movement of the pet
+	 *
+	 * @return null
+	 */
 	public function updateMove() {
 		if(is_null($this->closeTarget)) {
 			$x = $this->owner->x - $this->x;
@@ -134,6 +188,12 @@ abstract class Pets extends Creature {
 		$this->updateMovement();
 	}
 
+	/**
+	 * Updates the pet
+	 *
+	 * @param  integer $currentTick The current tick
+	 * @return boolean              Whether or not the update was true
+	 */
 	public function onUpdate($currentTick) {
 		if(!($this->owner instanceof Player) || $this->owner->closed) {
 			$this->fastClose();
@@ -154,6 +214,11 @@ abstract class Pets extends Creature {
 		return true;
 	}
 
+	/**
+	 * Returns the pet to the owner
+	 *
+	 * @return null
+	 */
 	public function returnToOwner() {
 		$len = rand(2, 6);
 		$x = (-sin(deg2rad( $this->owner->yaw))) * $len  +  $this->owner->getX();
@@ -163,11 +228,20 @@ abstract class Pets extends Creature {
 		$this->z = $z;
 	}
 
+	/**
+	 * Close the pet
+	 *
+	 * @return null
+	 */
 	public function fastClose() {
 		parent::close();
 	}
 
-
+	/**
+	 * Close the pet
+	 *
+	 * @return null
+	 */
 	public function close(){
 		if(!($this->owner instanceof Player) || $this->owner->closed) {
 			$this->fastClose();
@@ -181,6 +255,12 @@ abstract class Pets extends Creature {
 		}
 	}
 
+	/**
+	 * Get teh time interval
+	 *
+	 * @param  string $started The started time
+	 * @return integer         The time value
+	 */
 	public static function getTimeInterval($started) {
 		return round((strtotime(date('Y-m-d H:i:s')) - strtotime($started)) /60);
 	}

@@ -1,0 +1,13 @@
+# Whether or not to disable pets
+pets: true
+
+# Whether or not the pets can
+# be managed by anyone other than OP
+onlyOp: true
+
+# Users that have access to a particle effect
+# Array of usernames to a pet class
+users:
+    humerusj: WolfPet
+    williamtdr: PigPet
+    brandon15811: ChickenPet

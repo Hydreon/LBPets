@@ -12,8 +12,16 @@ use pocketmine\entity\Entity;
 use pocketmine\event\Listener;
 use pocketmine\Server;
 
+/**
+ * The pet manager
+ */
 class PetsManager implements Listener {
 
+	/**
+	 * The constructor, registers entities
+	 *
+	 * @param LBPets\Main $plugin The main plugin
+	 */
 	public function __construct($plugin) {
 		$server = Server::getInstance();
 
@@ -22,6 +30,14 @@ class PetsManager implements Listener {
 		Entity::registerEntity(PigPet::class);
 	}
 
+	/**
+	 * Creates the pet
+	 *
+	 * @param  string   $type   The type of the entity
+	 * @param  Position $source The position
+	 * @param  array   $args    Extra arguments
+	 * @return Entity           The entity
+	 */
 	public static function create($type, Position $source, ...$args) {
 		$chunk = $source->getLevel()->getChunk($source->x >> 4, $source->z >> 4, true);
 
@@ -44,6 +60,14 @@ class PetsManager implements Listener {
 		return Entity::createEntity($type, $chunk, $nbt, ...$args);
 	}
 
+	/**
+	 * Triggers the pet creation
+	 *
+	 * @param  Player $player   The player to spawn the pet to
+	 * @param  string $type     The type of the pet
+	 * @param  string $holdType The holding type
+	 * @return Pets             The pet
+	 */
 	public static function createPet($player, $type = "", $holdType = "") {
 		$len = rand(8, 12);
 		$x = (-sin(deg2rad($player->yaw))) * $len  + $player->getX();
