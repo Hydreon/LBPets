@@ -19,7 +19,7 @@ use pocketmine\event\player\PlayerRespawnEvent;
 class Main extends PluginBase implements Listener {
 
     /**
-     * An array of players mapped to the type of particle effect
+     * An array of players mapped to the type of Pet
      *
      * @type array
      */
@@ -186,7 +186,7 @@ class Main extends PluginBase implements Listener {
     /**
      * Give a user their pet
      *
-     * @param  string $user     The username of the person to give particles
+     * @param  string $user     The username of the person to give Pet
      * @param  string $pet      The pet to give (The class name)
      * @return boolean          Whether or not giving the pet was successful
      */

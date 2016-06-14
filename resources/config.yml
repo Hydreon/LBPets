@@ -5,7 +5,6 @@ pets: true
 # be managed by anyone other than OP
 onlyOp: true
 
-# Users that have access to a particle effect
 # Array of usernames to a pet class
 users:
     humerusj: WolfPet
