@@ -145,6 +145,10 @@ class Main extends PluginBase implements Listener {
 
                 $sender->sendMessage(TextFormat::RED . "[LBPets] You don't have permissions to do that...");
                 return true;
+            case "help":
+                $sender->sendMessage(TextFormat::GREEN . '[LBPets] Available commands: give, remove, find');
+                return true;
+                break;
             default:
                 return false;
         }

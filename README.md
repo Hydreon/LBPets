@@ -5,9 +5,9 @@ LBPets - A simple plugin for adding pets to your server
 
 | Command | Sub Command | User | Params | Description |
 |:-------:|:-----------:|:----:|:------:|:-----------:|
-| `pets`  |   `give`   | `<name>` |  `ChickenPet, OcelotPet, PigPet, WolfPet`  | Spawns a pet |
-| `pets`  |   `remove`  | `<name>` |    | Removes a player's pet |
-| `pets`  |    `find`   | `<name>` |    | Finds a player's pet |
+| `lbpets`  |   `give`   | `<name>` |  `ChickenPet, OcelotPet, PigPet, WolfPet`  | Spawns a pet |
+| `lbpets`  |   `remove`  | `<name>` |    | Removes a player's pet |
+| `lbpets`  |    `find`   | `<name>` |    | Finds a player's pet |
 
 ## The plugin can also be accessed by its API
 

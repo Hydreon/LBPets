@@ -7,9 +7,9 @@ author: LBSG
 description: Lifeboat Pets Plugin For All
 website: https://lbsg.net
 commands:
- pets:
+ lbpets:
   description: "Manages the pet plugin"
-  usage: "/pets <command> <args>"
+  usage: "/lbpets <command> <args>"
   permission: lbpets
 permissions:
  lbpets:
