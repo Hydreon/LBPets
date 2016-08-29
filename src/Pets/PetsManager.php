@@ -4,9 +4,9 @@ namespace Pets;
 
 use pocketmine\level\Location;
 use pocketmine\level\Position;
-use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\nbt\tag\Compound;
 use pocketmine\nbt\tag\DoubleTag;
-use pocketmine\nbt\tag\ListTag;
+use pocketmine\nbt\tag\Enum;
 use pocketmine\nbt\tag\FloatTag;
 use pocketmine\entity\Entity;
 use pocketmine\event\Listener;
@@ -41,18 +41,18 @@ class PetsManager implements Listener {
 	public static function create($type, Position $source, ...$args) {
 		$chunk = $source->getLevel()->getChunk($source->x >> 4, $source->z >> 4, true);
 
-		$nbt = new CompoundTag("", [
-			"Pos" => new ListTag("Pos", [
+		$nbt = new Compound("", [
+			"Pos" => new Enum("Pos", [
 				new DoubleTag("", $source->x),
 				new DoubleTag("", $source->y),
 				new DoubleTag("", $source->z)
 					]),
-			"Motion" => new ListTag("Motion", [
+			"Motion" => new Enum("Motion", [
 				new DoubleTag("", 0),
 				new DoubleTag("", 0),
 				new DoubleTag("", 0)
 					]),
-			"Rotation" => new ListTag("Rotation", [
+			"Rotation" => new Enum("Rotation", [
 				new FloatTag("", $source instanceof Location ? $source->yaw : 0),
 				new FloatTag("", $source instanceof Location ? $source->pitch : 0)
 					]),
